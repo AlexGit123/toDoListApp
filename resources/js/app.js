@@ -1,6 +1,6 @@
 import { router } from "./router";
 import { createApp } from "vue";
-import App from "./components/app.vue";
+import App from "./components/App.vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 

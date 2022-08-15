@@ -1,20 +1,35 @@
-//all items
+//all task rendered here 
 <template>
-    <div class="all-to-dos">
-        <p>TEST - table comp</p>
+    <div class="all-task">
+        <div v-for="(task, index) in tasks" :key="index">
+            <task 
+            :task="task" 
+            class="task"
+            v-on:taskchanged="$emit('reloadtask')"
+            >
+            </task>
+        </div> 
     </div>
 </template>
 
 <script>
+import task from "./task"
+
     export default {
         name: "Table", 
-        mounted() {
-            console.log('Component mounted.')
+        props: ['tasks'],
+        components: {
+            task
         }
     }
 </script>
 <style>
-.all-to-dos {
-    text-align: center;
+.all-task { 
+    text-align: center;    
+    padding: 10px;
+    margin-top: 5px;
+}
+.task { 
+    text-decoration: none;
 }
 </style>

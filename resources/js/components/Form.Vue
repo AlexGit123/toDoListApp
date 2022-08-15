@@ -1,16 +1,17 @@
-//Add todo and CRUDs
+//Add todo
 <template>
     <div class="item">
         <input type="checkbox"/>
         <input type="text" v-model="task.description"/>
-        <button class="button" role="button" @click="addTask">Add</button>
+        <button class="button" role="button" @click="addTask()">Add</button>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
-    data: function () { 
+    data: () => { 
         return { 
             task: { 
                 description: ""
@@ -19,6 +20,9 @@ export default {
     },
     methods: { 
         addTask() { 
+
+            let task = this.task; 
+
             console.log("clicked add button");
 
             if (task.description == ''){ 
@@ -26,12 +30,13 @@ export default {
             }
 
             axios.post('api/task/store', { 
-                task: this.task 
+                task: this.task
             })
 
             .then ( response => {
                 if(response.status == 201 ){ 
-                    this.task.description = ""
+                    this.task.description = "";
+                    // this.$emit('reloadtask');
                 }
             }).catch(error => { 
                 console.log(error);
