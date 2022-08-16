@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->text("description");
             $table->boolean("done")->default(false);
             $table->timestamp("done_at")->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
