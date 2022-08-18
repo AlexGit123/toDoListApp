@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Route::prefix('/task')->group(
         Route::delete('/{id}', [TaskController::class, 'destroy']);
     }
 );
+
+Route::get('/users', [UserController::class, 'index']);

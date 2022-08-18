@@ -1,24 +1,25 @@
 //all task rendered here 
 <template>
+
     <div class="all-task">
+
+        <!-- Loop through each task and render them -->
         <div v-for="(task, index) in tasks" :key="index">
+
             <task :task="task" class="task" v-on:taskchanged="$emit('reloadtask')">
             </task>
+
         </div>
-    </div>
-
-    <div class="user-dropdown">
 
     </div>
+
 </template>
-
 <script>
 import task from "./task"
-import users from "./users"
 
 export default {
     name: "Table",
-    props: ['tasks', 'users'],
+    props: ['tasks'],
     components: {
         task
     }
