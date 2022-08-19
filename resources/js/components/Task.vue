@@ -9,31 +9,15 @@
             <p>{{ task.description }}</p>
         </span>
 
-        <!-- <div v-for="(user, index) in users" :key="index">
-            <users :user="user"></users>
-        </div> -->
-
-        <!-- <users></users> -->
-
-        <div class="dropdown">
-            <button @click="myFunction() + getUsers()" class="dropbtn">Users</button>
-            <div id="myDropdown" class="dropdown-content">
-                <users></users>
-            </div>
-        </div>
+        <users></users>
 
         <button @click="removeTask()" class="trash">Delete</button>
 
-
     </div>
-
-
-
 
 </template>
 <script>
-import users from "./users.vue"
-import Users from "./users"
+import users from "./Users.vue"
 import axios from 'axios';
 
 console.log("testing singular task");
@@ -42,12 +26,7 @@ export default {
     components: {
         users
     },
-    props: ['task', 'users'],
-    data: () => {
-        return {
-            users: []
-        }
-    },
+    props: ['task', 'user'],
     methods: {
         updateCheck() {
             axios.put('api/task/' + this.task.id, {
@@ -70,28 +49,6 @@ export default {
                 .catch(error => {
                     console.log(error);
                 })
-        },
-        getUsers() {
-            axios.get('api/users').then(response => {
-                this.users = response.data
-            }).catch(error => {
-                console.log(error)
-            })
-        },
-        myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-    }
-}
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
         }
     }
 }

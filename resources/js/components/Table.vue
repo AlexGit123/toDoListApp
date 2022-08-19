@@ -15,7 +15,7 @@
 
 </template>
 <script>
-import task from "./task"
+import task from "./Task.vue"
 
 export default {
     name: "Table",

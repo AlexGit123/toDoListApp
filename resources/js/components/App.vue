@@ -12,10 +12,15 @@
 import HeaderComponent from './Header.vue';
 import FormComponent from './Form.vue'
 import TableComponent from './Table.vue'
+import { provide } from 'vue';
+import store from '../store/index.js'
 import axios from 'axios';
 
 export default {
     name: "App",
+    setup() {
+        provide('store', store)
+    },
     components: {
         HeaderComp: HeaderComponent,
         FormComp: FormComponent,
@@ -23,7 +28,8 @@ export default {
     },
     data: () => {
         return {
-            tasks: []
+            tasks: [],
+            users: []
         }
     },
     methods: {
@@ -31,14 +37,25 @@ export default {
             axios.get('api/tasks')
                 .then(response => {
                     this.tasks = response.data;
+
+                    console.log(response.data.length)
                 })
                 .catch(error => {
                     console.log(error);
                 })
-        }
+        },
+        getUsers() {
+            axios.get('api/users').then(response => {
+                this.users = response.data
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+
     },
     created() {
         this.getTask();
+        this.getUsers();
     }
 };
 
@@ -52,7 +69,7 @@ body {
 .list-container {
     background-color: rgb(222, 132, 222);
     width: 1000px;
-    height: 650px;
+    height: 700px;
     margin: auto
 }
 </style> 
