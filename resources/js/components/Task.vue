@@ -9,7 +9,7 @@
             <p>{{ task.description }}</p>
         </span>
 
-        <users></users>
+        <users :users="users"></users>
 
         <button @click="removeTask()" class="trash">Delete</button>
 
@@ -23,6 +23,13 @@ import axios from 'axios';
 console.log("testing singular task");
 
 export default {
+    data: () => {
+        return {
+            user: {
+                name: ""
+            }
+        }
+    },
     components: {
         users
     },
@@ -49,7 +56,14 @@ export default {
                 .catch(error => {
                     console.log(error);
                 })
-        }
+        },
+        getUsers() {
+            axios.get('api/users').then(response => {
+                this.users = response.data
+            }).catch(error => {
+                console.log(error)
+            })
+        },
     }
 }
 </script>

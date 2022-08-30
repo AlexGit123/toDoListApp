@@ -6,18 +6,17 @@
 
         <div id="myDropdown" class="dropdown-content">
 
-            <p>test</p>
-
         </div>
     </div>
 
 </template>
 <script>
+
 console.log("Users");
 
 export default {
     name: "Users",
-    props: ['users'],
+    props: ['user'],
     methods: {
         myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");

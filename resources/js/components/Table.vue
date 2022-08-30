@@ -19,7 +19,7 @@ import task from "./Task.vue"
 
 export default {
     name: "Table",
-    props: ['tasks'],
+    props: ['tasks', 'users'],
     components: {
         task
     }

@@ -20271,7 +20271,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Header",
-  props: ['tasks'],
+  props: [],
   setup: function setup() {
     var store = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)('store');
     return {
@@ -20298,7 +20298,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Table",
-  props: ['tasks'],
+  props: ['tasks', 'users'],
   components: {
     task: _Task_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -20324,6 +20324,13 @@ __webpack_require__.r(__webpack_exports__);
 
 console.log("testing singular task");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      user: {
+        name: ""
+      }
+    };
+  },
   components: {
     users: _Users_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -20348,6 +20355,15 @@ console.log("testing singular task");
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    getUsers: function getUsers() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/users').then(function (response) {
+        _this.users = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -20368,7 +20384,7 @@ __webpack_require__.r(__webpack_exports__);
 console.log("Users");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Users",
-  props: ['users'],
+  props: ['user'],
   methods: {
     myFunction: function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
@@ -20446,17 +20462,8 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "item"
 };
-
-var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "checkbox"
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.task.description = $event;
@@ -20596,7 +20603,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )], 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_users), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_users, {
+    users: _ctx.users
+  }, null, 8
+  /* PROPS */
+  , ["users"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.removeTask();
     }),
@@ -20632,7 +20643,7 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: "myDropdown",
     "class": "dropdown-content"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "test")], -1
+  }, null, -1
   /* HOISTED */
   );
 });

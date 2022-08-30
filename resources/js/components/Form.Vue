@@ -1,7 +1,6 @@
 //Add todo
 <template>
     <div class="item">
-        <input type="checkbox" />
         <input type="text" v-model="task.description" />
         <button class="button" role="button" @click="addTask()">Add</button>
     </div>
