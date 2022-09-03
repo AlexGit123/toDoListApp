@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskController;
+use App\Models\Task;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,16 @@ use App\Http\Controllers\HomeController;
 // Route::get('/{view?}', [HomeController::class, 'index'])->where('view', '(.*)')->name('landing');
 
 Route::get('/{any}', function () {
+
+    //Un-comment commented code to test polymorphic relationship
+
+    // $user = User::create([
+    //     'name' => 'Alexandro'
+    // ]);
+
+    // $user->task()->create([
+    //     'description' => 'testing polymorph. relationship'
+    // ]);
+
     return view('landing');
 })->where('any', '.*');
-

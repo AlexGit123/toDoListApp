@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('taskable_id')->nullable();
+            $table->string('taskable_type')->nullable();
             $table->foreignId('user_id')->nullable();
-            $table->text("description");
-            $table->boolean("done")->default(false);
+            $table->text('description')->nullable();
             $table->timestamp("done_at")->nullable();
             $table->timestamps();
 

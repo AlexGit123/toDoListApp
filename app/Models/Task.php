@@ -10,8 +10,10 @@ class Task extends Model
 {
     use HasFactory;
 
-    public function users()
+    protected $fillable = ['user_id', 'description'];
+
+    public function taskable()
     {
-        return $this->hasOne(User::class);
+        return $this->morphTo();
     }
 }

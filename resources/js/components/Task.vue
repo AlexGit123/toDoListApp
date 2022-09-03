@@ -2,17 +2,23 @@
 <template>
 
     <div class="task">
-
         <input type="checkbox" @change="updateCheck()" v-model="task.completed" />
 
         <span :class="[task.completed ? 'completed' : '', 'taskText']">
             <p>{{ task.description }}</p>
         </span>
 
-        <users :users="users"></users>
+        <!-- dropdown component  -->
+        <div class="dropdown">
+
+            <button @click="myFunction()" class="dropbtn">Users</button>
+
+            <div id="myDropdown" class="dropdown-content">
+                <users :users="users"></users>
+            </div>
+        </div>
 
         <button @click="removeTask()" class="trash">Delete</button>
-
     </div>
 
 </template>
@@ -25,15 +31,13 @@ console.log("testing singular task");
 export default {
     data: () => {
         return {
-            user: {
-                name: ""
-            }
+            users: [],
         }
     },
     components: {
         users
     },
-    props: ['task', 'user'],
+    props: ['task', 'users'],
     methods: {
         updateCheck() {
             axios.put('api/task/' + this.task.id, {
@@ -64,6 +68,25 @@ export default {
                 console.log(error)
             })
         },
+        myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        },
+    },
+    created() {
+        this.getUsers();
+    }
+}
+
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
 }
 </script>

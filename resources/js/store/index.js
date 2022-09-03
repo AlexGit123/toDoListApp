@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 import axios from "axios";
 
-//add task w empty array, 
+//add task w empty array,
 const state = reactive({
     counter: null,
 });
@@ -14,6 +14,7 @@ const methods = {
                 this.tasks = response.data;
 
                 state.counter = response.data.length;
+
                 //call mutation and store task array built from api and store in array, second store for users
             })
             .catch((error) => {

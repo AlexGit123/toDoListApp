@@ -1,10 +1,11 @@
 <template>
+    <p id="ID"></p>
 
     <div class="list-container">
         <header-comp></header-comp>
         <form-comp></form-comp>
 
-        <table-comp :tasks="tasks"></table-comp>
+        <table-comp :tasks="tasks" :users="users"></table-comp>
     </div>
 </template>
 
@@ -29,7 +30,7 @@ export default {
     data: () => {
         return {
             tasks: [],
-            users: []
+            users: [],
         }
     },
     methods: {
@@ -38,7 +39,8 @@ export default {
                 .then(response => {
                     this.tasks = response.data;
 
-                    console.log(response.data.length)
+                    let count = document.getElementById('ID')
+                    count.append(response.data.length)
                 })
                 .catch(error => {
                     console.log(error);
@@ -47,18 +49,17 @@ export default {
         getUsers() {
             axios.get('api/users').then(response => {
                 this.users = response.data
+
             }).catch(error => {
                 console.log(error)
             })
         },
-
     },
     created() {
         this.getTask();
         this.getUsers();
     }
 };
-
 </script>
 
 <style>

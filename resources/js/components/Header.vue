@@ -14,7 +14,6 @@ import { ref, inject } from 'vue';
 
 export default {
     name: "Header",
-    props: [],
     setup() {
         const store = inject('store');
 
