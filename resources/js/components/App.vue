@@ -1,6 +1,4 @@
 <template>
-    <p id="ID"></p>
-
     <div class="list-container">
         <header-comp></header-comp>
         <form-comp></form-comp>
@@ -38,9 +36,6 @@ export default {
             axios.get('api/tasks')
                 .then(response => {
                     this.tasks = response.data;
-
-                    let count = document.getElementById('ID')
-                    count.append(response.data.length)
                 })
                 .catch(error => {
                     console.log(error);

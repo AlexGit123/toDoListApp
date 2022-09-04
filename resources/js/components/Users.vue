@@ -2,6 +2,7 @@
 <template>
     <div v-for="(users, index) in users" :key="index">
         <!-- should return only user-name -->
+        <input type="checkbox" />
         <a>{{ users.name }}</a>
     </div>
 </template>
@@ -15,5 +16,7 @@ export default {
 }
 </script>
 <style scoped>
-    
+a {
+    padding-left: 10px;
+}
 </style>

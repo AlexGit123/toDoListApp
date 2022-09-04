@@ -9,11 +9,11 @@
         </span>
 
         <!-- dropdown component should apply to each button in a task  -->
-        <div class="dropdown">
+        <div class="dropdown" @blur="disableDropDown()">
 
             <button @click="myFunction()" class="dropbtn">Users</button>
 
-            <div id="myDropdown" class="dropdown-content">
+            <div id="myDropdown" class="dropdown-content" v-bind:class="{ show: dropdownOpened }">
                 <users :users="users"></users>
             </div>
 
@@ -33,6 +33,7 @@ export default {
     data: () => {
         return {
             users: [],
+            dropdownOpened: false,
         }
     },
     components: {
@@ -70,24 +71,14 @@ export default {
             })
         },
         myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
+            this.dropdownOpened = !this.dropdownOpened;
+        },
+        disableDropDown() {
+            this.dropdownOpened = false;
         },
     },
     created() {
         this.getUsers();
-    }
-}
-
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
     }
 }
 </script>

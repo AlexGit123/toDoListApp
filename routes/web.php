@@ -28,7 +28,7 @@ Route::get('/{any}', function () {
     //Un-comment commented code to test polymorphic relationship
 
     // $user = User::create([
-    //     'name' => 'Alexandro'
+    //     'name' => 'Name'
     // ]);
 
     // $user->task()->create([

@@ -1,11 +1,7 @@
 //header component
 <template>
     <div class="header">
-        <p class="text">To Do List: Total ({{ store.state.counter }})</p>
-    </div>
-
-    <div class="test">
-        <button class="button" @click="store.methods.getTask">Get total</button>
+        <p class="text">To Do List - Total ({{ store.state.counter }})</p>
     </div>
 </template>
 
@@ -17,10 +13,13 @@ export default {
     setup() {
         const store = inject('store');
 
+        store.methods.getTask();
+
         return {
             store
         }
-    }
+    },
+
 }
 
 console.log("testing header element");
