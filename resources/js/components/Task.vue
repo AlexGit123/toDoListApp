@@ -13,13 +13,8 @@
 
             <button @click="myFunction()" class="dropbtn">Users</button>
 
-            <!-- loop through users to display user-names -->
-            <div v-for="(users, index) in users" :key="index">
-
-                <div id="myDropdown" class="dropdown-content">
-                    <users :users="users"></users>
-                </div>
-
+            <div id="myDropdown" class="dropdown-content">
+                <users :users="users"></users>
             </div>
 
         </div>
