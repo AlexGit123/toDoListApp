@@ -13,9 +13,14 @@
 
             <button @click="myFunction()" class="dropbtn">Users</button>
 
-            <div id="myDropdown" class="dropdown-content">
-                <users :users="users"></users>
+            <div v-for="(users, index) in users" :key="index">
+
+                <div id="myDropdown" class="dropdown-content">
+                    <users :users="users"></users>
+                </div>
+
             </div>
+
         </div>
 
         <button @click="removeTask()" class="trash">Delete</button>
