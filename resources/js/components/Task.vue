@@ -8,11 +8,12 @@
             <p>{{ task.description }}</p>
         </span>
 
-        <!-- dropdown component  -->
+        <!-- dropdown component should apply to each button in a task  -->
         <div class="dropdown">
 
             <button @click="myFunction()" class="dropbtn">Users</button>
 
+            <!-- loop through users to display user-names -->
             <div v-for="(users, index) in users" :key="index">
 
                 <div id="myDropdown" class="dropdown-content">
