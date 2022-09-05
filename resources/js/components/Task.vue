@@ -1,33 +1,27 @@
 //single task component, should select user &| delete task entirely
 <template>
-
     <div class="task">
         <input type="checkbox" @change="updateCheck()" v-model="task.completed" />
 
         <span :class="[task.completed ? 'completed' : '', 'taskText']">
             <p>{{ task.description }}</p>
         </span>
-
-        <!-- dropdown component should apply to each button in a task  -->
+       
         <div class="dropdown" @blur="disableDropDown()">
+            <button @click="dropDownOpened()" class="dropbtn">Users</button>
 
-            <button @click="myFunction()" class="dropbtn">Users</button>
-
-            <div id="myDropdown" class="dropdown-content" v-bind:class="{ show: dropdownOpened }">
+            <div id="myDropdown" class="dropdown-content" :class="{ show: dropdownOpened }">
                 <users :users="users"></users>
             </div>
-
         </div>
 
         <button @click="removeTask()" class="trash">Delete</button>
     </div>
-
 </template>
+
 <script>
 import users from "./Users.vue"
 import axios from 'axios';
-
-console.log("testing singular task");
 
 export default {
     data: () => {
@@ -41,17 +35,18 @@ export default {
     },
     props: ['task', 'users'],
     methods: {
-        updateCheck() {
-            axios.put('api/task/' + this.task.id, {
-                task: this.task
-            }).then(response => {
-                if (response.status == 200) {
-                    console.log("updateCheck working");
-                }
-            }).catch(error => {
-                console.log(error);
-            })
-        },
+        //Conflict with the text styling when a task is checked off
+        // updateCheck() {
+        //     axios.put('api/task/' + this.task.id, {
+        //         task: this.task
+        //     }).then(response => {
+        //         if (response.status == 200) {
+        //             console.log("updateCheck working");
+        //         }
+        //     }).catch(error => {
+        //         console.log(error);
+        //     })
+        // },
         removeTask() {
             axios.delete('api/task/' + this.task.id)
                 .then(response => {
@@ -63,25 +58,16 @@ export default {
                     console.log(error);
                 })
         },
-        getUsers() {
-            axios.get('api/users').then(response => {
-                this.users = response.data
-            }).catch(error => {
-                console.log(error)
-            })
-        },
-        myFunction() {
+        dropDownOpened() {
             this.dropdownOpened = !this.dropdownOpened;
         },
         disableDropDown() {
             this.dropdownOpened = false;
         },
     },
-    created() {
-        this.getUsers();
-    }
 }
 </script>
+
 <style scoped>
 .completed {
     text-decoration-line: line-through;

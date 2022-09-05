@@ -20324,7 +20324,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 
 
-console.log("testing singular task");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -20337,17 +20336,18 @@ console.log("testing singular task");
   },
   props: ['task', 'users'],
   methods: {
-    updateCheck: function updateCheck() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default().put('api/task/' + this.task.id, {
-        task: this.task
-      }).then(function (response) {
-        if (response.status == 200) {
-          console.log("updateCheck working");
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
+    //Conflict with the text styling when a task is checked off
+    // updateCheck() {
+    //     axios.put('api/task/' + this.task.id, {
+    //         task: this.task
+    //     }).then(response => {
+    //         if (response.status == 200) {
+    //             console.log("updateCheck working");
+    //         }
+    //     }).catch(error => {
+    //         console.log(error);
+    //     })
+    // },
     removeTask: function removeTask() {
       axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]('api/task/' + this.task.id).then(function (response) {
         if (response == 200) {
@@ -20357,24 +20357,12 @@ console.log("testing singular task");
         console.log(error);
       });
     },
-    getUsers: function getUsers() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/users').then(function (response) {
-        _this.users = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    myFunction: function myFunction() {
+    dropDownOpened: function dropDownOpened() {
       this.dropdownOpened = !this.dropdownOpened;
     },
     disableDropDown: function disableDropDown() {
       this.dropdownOpened = false;
     }
-  },
-  created: function created() {
-    this.getUsers();
   }
 });
 
@@ -20527,7 +20515,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Loop through each task and render them "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks, function (task, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" task child component  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_task, {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" task child component and pass prop data  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_task, {
       task: task,
       users: $props.users,
       "class": "task",
@@ -20571,7 +20559,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     onChange: _cache[0] || (_cache[0] = function ($event) {
-      return $options.updateCheck();
+      return _ctx.updateCheck();
     }),
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $props.task.completed = $event;
@@ -20584,14 +20572,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )], 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dropdown component should apply to each button in a task  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "dropdown",
     onBlur: _cache[3] || (_cache[3] = function ($event) {
       return $options.disableDropDown();
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.myFunction();
+      return $options.dropDownOpened();
     }),
     "class": "dropbtn"
   }, "Users"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -20731,13 +20719,17 @@ __webpack_require__.r(__webpack_exports__);
 var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
   counter: null
 });
+var task = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+  tasks: []
+});
 var methods = {
   getTask: function getTask() {
     var _this = this;
 
     axios__WEBPACK_IMPORTED_MODULE_1___default().get("api/tasks").then(function (response) {
+      //consider "storing" this in task.tasks to keep on single state of truth
       _this.tasks = response.data;
-      state.counter = response.data.length; //call mutation and store task array built from api and store in array, second store for users
+      state.counter = response.data.length;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -22776,7 +22768,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-1f42fb90] {\n    width: 1000px;\n    height: 40px;\n    margin: auto;\n    background-color: rgb(208, 170, 170);\n    text-align: center;\n}\n.text[data-v-1f42fb90] {\n    font-size: 2em;\n    color: rgb(0, 0, 0);\n}\n.test[data-v-1f42fb90] {\n    width: 1000px;\n    height: 50px;\n    margin: auto;\n    text-align: center;\n    padding-top: 5px;\n}\n\n/* CSS */\n.button[data-v-1f42fb90] {\n    background-color: #EA4C89;\n    border-radius: 8px;\n    border-style: none;\n    box-sizing: border-box;\n    color: #FFFFFF;\n    cursor: pointer;\n    display: inline-block;\n    font-family: \"Haas Grot Text R Web\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n    font-size: 14px;\n    font-weight: 500;\n    height: 40px;\n    line-height: 20px;\n    list-style: none;\n    margin: 0;\n    outline: none;\n    padding: 10px 16px;\n    position: relative;\n    text-align: center;\n    text-decoration: none;\n    transition: color 100ms;\n    vertical-align: baseline;\n    -moz-user-select: none;\n         user-select: none;\n    -webkit-user-select: none;\n    touch-action: manipulation;\n}\n.button[data-v-1f42fb90]:hover,\n.button[data-v-1f42fb90]:focus {\n    background-color: #F082AC;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-1f42fb90] {\n    width: 1000px;\n    height: 40px;\n    margin: auto;\n    background-color: rgb(208, 170, 170);\n    text-align: center;\n}\n.text[data-v-1f42fb90] {\n    font-size: 2em;\n    color: rgb(0, 0, 0);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

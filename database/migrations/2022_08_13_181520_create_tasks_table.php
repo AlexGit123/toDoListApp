@@ -17,12 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('taskable_id')->nullable();
             $table->string('taskable_type')->nullable();
-            $table->foreignId('user_id')->nullable();
             $table->text('description')->nullable();
-            $table->timestamp("done_at")->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

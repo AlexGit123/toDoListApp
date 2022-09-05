@@ -17,12 +17,6 @@ use App\Models\User;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/{view?}', [HomeController::class, 'index'])->where('view', '(.*)')->name('landing');
-
 Route::get('/{any}', function () {
 
     //Un-comment commented code to test polymorphic relationship

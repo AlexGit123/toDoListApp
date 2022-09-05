@@ -6,6 +6,7 @@
         <a>{{ users.name }}</a>
     </div>
 </template>
+
 <script>
 console.log("Users");
 
@@ -15,6 +16,7 @@ export default {
     methods: {}
 }
 </script>
+
 <style scoped>
 a {
     padding-left: 10px;

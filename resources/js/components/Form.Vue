@@ -4,8 +4,6 @@
         <input type="text" v-model="task.description" />
         <button class="button" role="button" @click="addTask()">Add</button>
     </div>
-
-
 </template>
 
 <script>
@@ -45,7 +43,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <style scoped>

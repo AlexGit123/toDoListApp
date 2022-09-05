@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: toDoListDB
--- Generation Time: 2022-08-15 09:02:24.4020
+-- Generation Time: 2022-09-05 10:09:47.5860
 -- -------------------------------------------------------------
 
 
@@ -62,25 +62,21 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `tasks` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `done` tinyint(1) NOT NULL DEFAULT '0',
-  `done_at` timestamp NULL DEFAULT NULL,
+  `taskable_id` bigint unsigned DEFAULT NULL,
+  `taskable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -89,9 +85,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_08_13_181520_create_tasks_table', 1);
-
-INSERT INTO `tasks` (`id`, `description`, `done`, `done_at`, `created_at`, `updated_at`) VALUES
-(1, 'test', 0, NULL, '2022-08-13 20:12:46', '2022-08-14 19:53:27');
 
 
 
